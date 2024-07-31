@@ -1,0 +1,63 @@
+/* frontend\app\src\app\signup\signup.component.css */
+/* user-signup.component.css */
+
+/* Container to center the form */
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Adjust as needed */
+  background-color: #f0f0f0; /* Light background color */
+}
+
+/* Form styling */
+.signup-form {
+  width: 400px; /* Adjust width as needed */
+  padding: 30px;
+  background-color: #ffffff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+}
+
+.signup-form h2 {
+  text-align: center;
+  color: #333333; /* Dark text color */
+  margin-bottom: 20px;
+}
+
+.signup-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #cccccc; /* Light border */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.signup-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4CAF50; /* Green button */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 4px;
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}

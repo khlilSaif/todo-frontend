@@ -1,0 +1,150 @@
+body {
+  background: #f9f9f9;
+}
+
+.container-fluid {
+  height: 100vh; /* Make container take the full viewport height */
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card-header h2,
+.project-card h5 {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.project-list-wrapper, 
+.task-list-wrapper {
+  background-color: #fff;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-list-inner {
+  border-right: 1px solid #e0e0e0;
+  flex-grow: 1;
+  max-height: 890px; /* Set a fixed height or remove if using flexbox fully */
+  overflow-y: auto; /* Enable vertical scroll */
+}
+
+.project-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px;
+}
+
+.project-card.selected {
+  border: 1px solid #007bff;
+  background-color: #eef7ff;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.form-control {
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: .5rem;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.custom-close {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+}
+
+.custom-close:hover {
+  color: #ff0000;
+}
+
+.expiration-date {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 10px;
+}
+
+.project-card {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+}
+
+.project-card:hover {
+  background-color: #e9f5ff;
+}
+
+.tasks-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-custom {
+  position: relative;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.btn-close-custom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-close-custom:hover {
+  color: #ff0000; /* Optional: Change color on hover */
+}
+
+.task-details {
+  background-color: #fff;
+  border-left: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.task-details.expanded {
+  background-color: #eef6ff;
+  border-left: 2px solid #007bff;
+  padding: 20px;
+}

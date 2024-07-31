@@ -1,0 +1,87 @@
+<div class="container-fluid d-flex justify-content-center mt-5">
+  <div class="row w-100" style="max-width: 1200px;">
+    <!-- Left Pane: Projects -->
+    <div class="col-md-3 project-list-wrapper p-0">
+      <div class="project-list-inner">
+          <div class="card-header d-flex justify-content-between align-items-center">
+              <h2>All Projects</h2>
+              <input type="text" class="form-control" placeholder="Filter by Name" [(ngModel)]="filterText" (ngModelChange)="filterProjects()">
+          </div>
+          <div class="card-body">
+              <button type="button" class="btn btn-primary w-100 mb-3" (click)="openModal()">Add Project</button>
+              <div *ngFor="let project of filteredProjects; let i = index"
+                   class="card card-custom project-card mb-2"
+                   [class.selected]="project.id === selectedProjectId"
+                   (click)="selectProject(project)">
+  
+                  <!-- "X" button for projects -->
+                  <button type="button" 
+                          class="btn-close-custom" 
+                          aria-label="Close" 
+                          (click)="removeProject(project)" 
+                          (click)="$event.stopPropagation()">
+                  &times;
+                  </button>
+  
+                  <div class="card-body">
+                      <h5 class="card-title">{{ project.name }}</h5>
+                      <p class="card-text">{{ project.description }}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <!-- Right Pane: Tasks -->
+    <div class="col-md-9 task-list-wrapper p-0">
+      <div class="tasks-section">
+        <div class="card-header">
+          <h2>Tasks for {{ getSelectedProjectName() }}</h2>
+        </div>
+        <div class="card-body">
+          <app-task-list [selectedProjectId]="selectedProjectId" (taskSelected)="openTaskDetailsModal($event)"></app-task-list>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Project Modal -->
+  <div *ngIf="showModal" class="modal-backdrop fade show"></div>
+  <div class="modal fade" [ngClass]="{'show d-block': showModal}" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Project</h5>
+          <button type="button" class="custom-close" (click)="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="projectName" class="form-label">Name</label>
+            <input type="text" class="form-control" id="projectName" [(ngModel)]="newProject.name">
+          </div>
+          <div class="form-group">
+            <label for="projectDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="projectDescription" [(ngModel)]="newProject.description"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addProject()">Add Project</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Task Details Modal -->
+  <div *ngIf="showTaskDetails" class="modal-backdrop fade show"></div>
+  <div class="modal fade" [ngClass]="{'show d-block': showTaskDetails}" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Task Details</h5>
+          <button type="button" class="custom-close" (click)="closeTaskDetailsModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <app-task-details [task]="selectedTask"></app-task-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

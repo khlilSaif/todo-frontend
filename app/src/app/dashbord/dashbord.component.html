@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="sidebar">
+      <app-project-list (projectSelected)="onProjectSelected($event)"></app-project-list>
+    </div>
+    <div class="main">
+      <app-task-list [projectId]="selectedProjectId" (taskSelected)="onTaskSelected($event)"></app-task-list>
+    </div>
+    <div class="details" *ngIf="selectedTask">
+      <app-task-details [task]="selectedTask"></app-task-details>
+    </div>
+</div>

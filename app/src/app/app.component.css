@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #007bff; /* Blue background */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around; /* Space around for even distribution */
+  align-items: center;
+}
+
+.navbar a {
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+.navbar a:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter blue background */
+  color: white;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.main-content {
+  padding-top: 50px; /* Add padding to avoid content hidden behind the navbar */
+}

@@ -1,0 +1,233 @@
+body {
+  background: #f9f9f9;
+}
+
+.container-fluid {
+  height: calc(100vh - 40px); /* Full viewport height minus some margin */
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.project-list-wrapper,
+.task-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  height: 100%; /* Ensure it takes full height */
+}
+
+.project-list-inner,
+.tasks-list-inner {
+  border-right: 1px solid #e0e0e0;
+  flex-grow: 1;
+  overflow-y: auto; /* Enable vertical scroll */
+  padding-bottom: 10px; /* Add some padding at the bottom */
+}
+
+.task-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px;
+  width: 100%;
+}
+
+.project-card.selected,
+.task-card.selected {
+  border: 1px solid #007bff;
+  background-color: #eef7ff;
+}
+
+.card {
+  border-radius: 10px;
+  width: 100%; /* Ensure the card takes full width */
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.form-control {
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: .5rem;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.custom-close {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+}
+
+.custom-close:hover {
+  color: #ff0000;
+}
+
+.expiration-date {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 10px;
+}
+
+.project-card,
+.task-card {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+  width: 100%; /* Ensure the cards take full width */
+}
+
+.project-card:hover,
+.task-card:hover {
+  background-color: #e9f5ff;
+}
+
+.tasks-section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px); /* Adjust height to fit your button size */
+}
+
+.card-custom {
+  position: relative;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.btn-close-custom {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  color: black;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.btn-close-custom:hover {
+  color: red; /* Optional: Change color on hover */
+}
+
+.blocked {
+  display: block;
+  position: absolute;
+  top: 45px; /* Adjust as necessary to position below the "X" button */
+  right: 10px;
+  z-index: 1;
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.circle-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid grey;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.circle-indicator.completed {
+  background-color: grey;
+}
+
+.completed-text {
+  text-decoration: line-through;
+}
+
+.tasks-list-inner {
+  flex-grow: 1;
+  overflow-y: auto; /* Enable vertical scroll */
+  max-height: 100%; /* Ensure it does not exceed the container's height */
+}
+
+.subtasks-section {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.subtasks-section h6 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.scrollable-subtasks {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.subtasks-list {
+  list-style: none;
+  padding: 0;
+}
+
+.subtask-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background-color: #fff;
+}
+
+.subtask-input {
+  flex-grow: 1;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+.subtask-text {
+  flex-grow: 1;
+  color: black;
+}
+
+.subtask-text.completed-text {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.new-subtask-input {
+  width: calc(100% - 60px);
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #ddd;
+  margin-right: 5px;
+}
+
+.btn-primary {
+  padding: 8px 12px;
+  background-color: #007bff;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,165 @@
+body {
+  background: #f9f9f9;
+}
+
+.container-fluid {
+  height: calc(100vh - 40px); /* Full viewport height minus some margin */
+  display: flex;
+  justify-content: center;
+}
+
+.row {
+  height: 100%;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.project-list-wrapper,
+.task-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  height: 100%; /* Ensure it takes full height */
+}
+
+.project-list-inner,
+.tasks-list-inner {
+  border-right: 1px solid #e0e0e0;
+  flex-grow: 1;
+  overflow-y: auto; /* Enable vertical scroll */
+  padding-bottom: 10px; /* Add some padding at the bottom */
+}
+
+.task-card {
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  border: 1px solid transparent;
+  padding: 8px;
+  max-width: 100%;
+}
+
+.project-card.selected,
+.task-card.selected {
+  border: 1px solid #007bff;
+  background-color: #eef7ff;
+}
+
+.card {
+  border-radius: 10px;
+  width: calc(100% - 32px); /* Adjust width to account for padding and borders */
+  margin: 0 auto; /* Center the card within the parent */
+}
+
+.card-body {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.task-content {
+  display: flex;
+  align-items: center;
+}
+
+.form-control {
+  border-radius: 5px;
+  font-size: 0.875rem;
+  padding: .5rem;
+}
+
+.modal-content {
+  border-radius: 10px;
+}
+
+.custom-close {
+  border: none;
+  background: none;
+  font-size: 1.2rem;
+}
+
+.custom-close:hover {
+  color: #ff0000;
+}
+
+.expiration-date {
+  display: block;
+  margin-top: 10px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 10px;
+}
+
+.project-card,
+.task-card {
+  box-shadow: none;
+  border: 1px solid #e0e0e0;
+}
+
+.project-card:hover,
+.task-card:hover {
+  background-color: #e9f5ff;
+}
+
+.tasks-section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px); /* Adjust height to fit your button size */
+}
+
+.card-custom {
+  position: relative;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.btn-close-custom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-close-custom:hover {
+  color: #ff0000; /* Optional: Change color on hover */
+}
+
+.blocked {
+  display: inline-block; /* Ensure it becomes inline within its container */
+  margin-left: auto; /* Push it to the far right */
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.circle-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid grey;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.circle-indicator.completed {
+  background-color: grey;
+}
+
+.completed-text {
+  text-decoration: line-through;
+}
+
+.tasks-list-inner {
+  flex-grow: 1;
+  overflow-y: auto; /* Enable vertical scroll */
+  max-height: 100%; /* Ensure it does not exceed the container's height */
+}
