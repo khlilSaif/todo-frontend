@@ -1,3 +1,3 @@
 export class Constants {
-    public static API_URL = 'http://localhost:8000';
+    public static API_URL = 'https://todo-backend-11vi.onrender.com';
 }

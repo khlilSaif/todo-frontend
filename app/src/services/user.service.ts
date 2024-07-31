@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-const apiUrl = 'http://localhost:8000/user/';
+const apiUrl = 'https://todo-backend-11vi.onrender.com/user/';
 @Injectable({
   providedIn: 'root'
 })
