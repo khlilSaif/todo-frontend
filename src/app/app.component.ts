@@ -16,10 +16,10 @@ import { TagsService } from '../services/tags.service';
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     ProjectComponent,
     TaskListComponent,
     TaskDetailsComponent,
-    CommonModule,
     HttpClientModule,
     RouterModule,
     LoginComponent,

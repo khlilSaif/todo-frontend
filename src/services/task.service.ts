@@ -12,7 +12,6 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   getAllTasks(project_id: number, token: string | null): Observable<any>{
-    // TODO: convert the response to list of tasks with task.tags.id = tag_id
      return this.http.post<any>(`${Constants.API_URL}/task`,{
       project_id: project_id,
       token: token,
@@ -35,7 +34,6 @@ export class TaskService {
   }
 
   addTask(project_id?: number, description?: string, blocked_task?:number, token?: string | null): Observable<any>{
-    console.log(project_id," ",description," ", blocked_task);
     return this.http.post<any>(`${Constants.API_URL}/task/add`,{
       task:{
         project_id: project_id,
@@ -58,7 +56,6 @@ export class TaskService {
   }
 
   addSubtask(task_id?: number, description?: string, token?: string | null): Observable<any>{
-    console.log(task_id," ",description, " ",  token);
     return this.http.post<any>(`${Constants.API_URL}/subtask/add`,{
         task_id: task_id,
         description: description,

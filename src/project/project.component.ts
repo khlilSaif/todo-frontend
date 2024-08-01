@@ -58,6 +58,10 @@ export class ProjectComponent implements OnInit {
   }
 
   addProject() {
+    if (!this.newProject.name || !this.newProject.description) {
+      alert('Please enter a name and a description for the project');
+      return;
+    }
     if( !localStorage?.getItem('token')){
       return;
     }
@@ -80,7 +84,6 @@ export class ProjectComponent implements OnInit {
     }
     this._projectService.getAll(localStorage?.getItem('token')).subscribe(
       (response) => {
-        console.log(response, "test");
         this.projects = response;
         this.filteredProjects = [...this.projects];
         this.filterProjects(); 
@@ -102,7 +105,6 @@ export class ProjectComponent implements OnInit {
            this.selectedProjectId = 0;
         }),
         (error =>{
-          console.log(error);
         })
       );
   }

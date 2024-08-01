@@ -51,7 +51,7 @@
   <!-- Blocker Task -->
   <div class="form-group">
     <label for="blockingTaskDetails" class="form-label">Blocked By</label>
-    <select class="form-select" id="blockingTaskDetails" [(ngModel)]="blocked" (change)="updateBlockedTask()">
+    <select style="margin-left: 20px;" class="form-select" id="blockingTaskDetails" [(ngModel)]="blocked" (change)="updateBlockedTask()">
       <option [ngValue]="undefined">None</option>
       <option *ngFor="let taskOption of tasks" [ngValue]="taskOption.id">{{ taskOption.description }}</option>
     </select>

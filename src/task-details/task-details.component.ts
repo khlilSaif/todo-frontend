@@ -79,6 +79,7 @@ export class TaskDetailsComponent implements OnInit {
 
   addSubtask() {
     if (!this.newSubtaskDescription.trim()) {
+      window.alert('Please enter a non-empty description for the subtask');
       return;
     }
 
@@ -86,7 +87,7 @@ export class TaskDetailsComponent implements OnInit {
       if( !localStorage?.getItem('token') ){
         return;
       }
-      this.taskService.addSubtask(this.task.id, this.newSubtaskDescription,localStorage?.getItem('token')).subscribe(
+      this.taskService.addSubtask(this.task.id, this.newSubtaskDescription, localStorage?.getItem('token')).subscribe(
         (response: Subtask) => {
           this.subtasks.push(response);
           this.newSubtaskDescription = '';
@@ -124,6 +125,10 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   addTag(){
+    if (!this.newTagName.trim()) {
+      alert('Please enter a name for the tag');
+      return;
+    }
     if( !localStorage?.getItem('token')){
       return;
     }
@@ -177,22 +182,43 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   saveTask(){
+    // TODO: show an alert to the user when it fails
+    if (!this.task?.description.trim()) {
+      this.isValidDescription = false;
+      window.alert('Please enter a non-empty description for the task');
+      return;
+    }
     if( !localStorage?.getItem('token')){
+      window.alert('Please log in to add a task');
       return;
     }
        this.taskService.updateTask(this.task,localStorage?.getItem('token')).subscribe(
         (response => {
             this.loadTasksList();
+            if( response.status != 200){
+              window.alert('Failed to update task. Please try again.');
+            }
         }),
         (error =>{
-
+          if( this.task ){
+            this.task.blocked_task = null;
+          }
+            window.alert('Failed to update task. Please try again.');
+            console.error('Error updating task:', error);
         })
        )
   }
   
   updateDescription() {
-    console.log(this.task);
-    console.log(this.blocked);
+    if (!this.editableDescription.trim()) {
+      this.isValidDescription = false;
+      return;
+    }
+    if( this.task ){
+       this.task.description = this.editableDescription;
+       this.saveTask();
+    }
+    this.isEditingDescription = false;
     if (this.editableDescription.trim()) {
       if( this.task ){
          this.task.description = this.editableDescription;

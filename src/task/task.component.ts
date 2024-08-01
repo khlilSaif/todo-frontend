@@ -100,21 +100,24 @@ export class TaskListComponent implements OnInit, OnChanges {
   }
 
   addTask() {
-    if (!this.newTask.description) {
+    // TODO: don't allow empty string and write a failure message to the user
+    if (!this.newTask.description?.trim()) {
+      window.alert('Please enter a non-empty description for the task');
       return;
     }
     if(!localStorage?.getItem('token')){
-       return;
+      window.alert('Please log in to add a task');
+      return;
     }
     this.taskService.addTask(this.selectedProjectId, this.newTask.description, this.newTask.blocked_task || undefined, localStorage?.getItem('token')).subscribe(
       (response) => {
         this.tasks.push(response);
         this.closeTaskModal();
         this.populateBlockedTaskMap();
-        this.mapTagsAndTasks();
       },
       (error) => {
         console.error('Error adding task:', error);
+        window.alert('Failed to add task. Please try again.');
       }
     );
     this.newTask.description = '';
