@@ -1,0 +1,89 @@
+<div class="layout-container">
+  <div class="tasks-section">
+    <div class="text-center mb-4">
+        <button *ngif="selectedProjectId" type="button" class="btn btn-primary w-100" (click)="openTaskModal()">Add Task</button>
+    </div>
+    <div class="tasks-list-inner">
+        <div *ngFor="let task of tasks" 
+             class="card task-card mb-2 shadow-sm" 
+             (click)="openTaskDetailModal(task)">
+            
+            <!-- "X" button -->
+            <button type="button" 
+                    class="btn-close-custom" 
+                    aria-label="Close" 
+                    (click)="removeTask(task)" 
+                    (click)="$event.stopPropagation()">
+                &times;
+            </button>
+
+            <div class="card-body d-flex align-items-center">
+                <div class="task-content d-flex align-items-center">
+                    <!-- Circle -->
+                    <div class="circle-indicator" 
+                         [ngClass]="{'completed': task.completed}"
+                         (click)="toggleCompletion(task)"
+                         (click)="$event.stopPropagation()">
+                    </div>
+                    <p class="task-text mb-1"
+                       [ngClass]="{'completed-text': task.completed}">
+                        {{ task.description }}
+                        <span *ngIf="task.blocked_task" class="blocked">Blocked</span>
+                    </p>
+                </div>
+                <div class="tags">
+                    <span *ngIf="task.tags" class="badge badge-primary mr-1">{{ task.tags.name }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- Task Modal -->
+  <div *ngIf="showTaskModal" class="modal-backdrop fade show"></div>
+  <div class="modal fade" [ngClass]="{ 'show d-block': showTaskModal }" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Add New Task</h5>
+          <button type="button" class="custom-close" (click)="closeTaskModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="taskDescription" class="form-label">Description</label>
+            <textarea class="form-control" id="taskDescription" [(ngModel)]="newTask.description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="blockingTask" class="form-label">Blocker Task</label>
+            <select class="form-select" id="blockingTask" [(ngModel)]="newTask.blocked_task">
+              <option [ngValue]="undefined">None</option>
+              <option *ngFor="let task of tasks" [ngValue]="task.id">{{ task.description }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeTaskModal()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="addTask()">Add Task</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Task Details Modal -->
+  <div *ngIf="showTaskDetailModal" class="modal-backdrop fade show"></div>
+  <div class="modal fade" [ngClass]="{ 'show d-block': showTaskDetailModal }" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Task Details</h5>
+          <button type="button" class="custom-close" (click)="closeTaskDetailModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+          <app-task-details [tagAssignedToTask]="selectedTask?.tags" [availableTags]="availableTags" [task]="selectedTask" [tasks]="tasks" 
+          (closeDetails)="closeTaskDetailModal()" (removeTag)="removeTag($event)"
+          (loadTasks)="loadMainData()"></app-task-details>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
