@@ -1,7 +1,7 @@
 <div class="layout-container">
   <div class="tasks-section">
     <div class="text-center mb-4">
-        <button *ngif="selectedProjectId" type="button" class="btn btn-primary w-100" (click)="openTaskModal()">Add Task</button>
+        <button *ngIf="selectedProjectId" type="button" class="btn btn-primary w-100" (click)="openTaskModal()">Add Task</button>
     </div>
     <div class="tasks-list-inner">
         <div *ngFor="let task of tasks" 
