@@ -22,7 +22,12 @@ export class SignupComponent {
   constructor(private userService: UserService, private router: Router) {}
 
   onSignupSubmit() {
-    console.log(this.username, this.password);
+    if (this.username.trim() === '' || this.password.trim() === '') {
+      this.errorMessage = 'Please enter a non-empty username and password';
+      return;
+    }
+
+    // TODO: don't allow empty or whitespace username or password
     this.userService.handleSignup(this.username, this.password)
       .subscribe(
         (response) => {
