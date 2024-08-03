@@ -1,5 +1,5 @@
 
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 import { Project, ProjectInput, Task } from '../interfaces';
@@ -12,6 +12,7 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { TaskListComponent } from '../task/task.component';
 import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../app/local-storage.service';
 
 @Component({
   selector: 'app-project-list',
@@ -32,10 +33,14 @@ export class ProjectComponent implements OnInit {
   selectedTask: Task | null = null;
   showTaskDetails: boolean = false;
 
-  constructor(private _projectService: ProjectService, private router: Router) {
-    if( !localStorage?.getItem('token')){
+  constructor(private _projectService: ProjectService, private router: Router, private localStorage: LocalStorageService) {
+    if( !this.localStorage?.getItem('token')){
       this.router.navigate(['/login']);
     }
+    // if( !this.localStorage?.getItem('project')){
+    //   this.localStorage?.setItem('project', 'true');
+    //     location.reload();
+    // }
   }
 
   getSelectedProjectName(): string {
@@ -58,10 +63,7 @@ export class ProjectComponent implements OnInit {
   }
 
   addProject() {
-    if( !localStorage?.getItem('token')){
-      return;
-    }
-    this.newProject.token = localStorage?.getItem('token') || '';
+    this.newProject.token = this.localStorage?.getItem('token') || '';
     this._projectService.addProject(this.newProject).subscribe(
       (response) => {
         this.closeModal();
@@ -75,10 +77,10 @@ export class ProjectComponent implements OnInit {
   }
 
   private loadMainData(): void { 
-    if( !localStorage?.getItem('token')){
+    if( !this.localStorage?.getItem('token')){
       return;
     }
-    this._projectService.getAll(localStorage?.getItem('token')).subscribe(
+    this._projectService.getAll(this.localStorage?.getItem('token')).subscribe(
       (response) => {
         console.log(response, "test");
         this.projects = response;
@@ -93,10 +95,10 @@ export class ProjectComponent implements OnInit {
 
   removeProject(project: Project) 
   {
-    if( !localStorage?.getItem('token')){
+    if( !this.localStorage?.getItem('token')){
       return;
     }
-      this._projectService.removeProject(project.id,localStorage?.getItem('token')).subscribe(
+      this._projectService.removeProject(project.id,this.localStorage?.getItem('token')).subscribe(
         (response =>{
            this.loadMainData();
            this.selectedProjectId = 0;

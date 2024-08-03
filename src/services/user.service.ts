@@ -36,4 +36,14 @@ export class UserService {
         })
       );
   }
+
+  addGuestUser(): Observable<any> {
+    return this.http.post<any>(`${apiUrl}guest`, {})
+      .pipe(
+        catchError((error: any) => {
+          console.error('Guest user error:', error);
+          return throwError(error);
+        })
+      );
+  }
 }

@@ -5,6 +5,7 @@ import { bootstrapApplication, provideClientHydration, provideProtractorTestingS
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LocalStorageService } from './local-storage.service';
 
    export const appConfig: ApplicationConfig = {
      providers: [
@@ -14,5 +15,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
        provideProtractorTestingSupport(),
        HttpClientModule,
        DragDropModule,
+       LocalStorageService
      ]
    };

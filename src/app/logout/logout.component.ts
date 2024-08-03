@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-logout',
@@ -9,8 +10,10 @@ import { Router } from '@angular/router';
   styleUrl: './logout.component.css'
 })
 export class LogoutComponent {
-    constructor(private router: Router){
-       localStorage?.removeItem('token');
+    constructor(private router: Router, private localStorage: LocalStorageService) {
+       this.localStorage.removeItem('token');
+       this.localStorage.setItem('guest', 'true');
+       this.localStorage.removeItem('reload');
        this.router.navigate(['/login']);
     }
 }

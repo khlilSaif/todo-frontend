@@ -1,7 +1,8 @@
 <div class="navbar">
-    <a routerLink="/project">Home</a>
+    <a (click)="checkGuest()" routerLink="/project">Home</a>
     <a routerLink="/about">About</a>
-    <a routerLink="/logout">Logout</a>
+    <a *ngIf="!guest" routerLink="/logout">Logout</a>
+    <a *ngIf="guest" routerLink="login">login</a>
 </div>
 <div class="main-content">
     <router-outlet></router-outlet>

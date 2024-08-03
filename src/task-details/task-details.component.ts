@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { TagsService } from '../services/tags.service';
 import { response } from 'express';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../app/local-storage.service';
 @Component({
   selector: 'app-task-details',
   standalone: true,
@@ -34,9 +35,9 @@ export class TaskDetailsComponent implements OnInit {
   editing: boolean = false;
 
 
-  constructor(private taskService: TaskService, private tagsService: TagsService, private router: Router) {
+  constructor(private taskService: TaskService, private tagsService: TagsService, private router: Router, private _localStorage: LocalStorageService) {
       this.blocked = this.task?.blocked_task;
-      if(!localStorage?.getItem('token')){
+      if(!this._localStorage?.getItem('token')){
         this.router.navigate(['/login']);
       }
   }
@@ -63,10 +64,10 @@ export class TaskDetailsComponent implements OnInit {
 
   loadSubtasks(task: Task | undefined) {
     if (task) {
-      if(!localStorage?.getItem('token')){
+      if(!this._localStorage?.getItem('token')){
         return;
       }
-      this.taskService.getSubtasks(task.id, localStorage?.getItem('token')).subscribe(
+      this.taskService.getSubtasks(task.id, this._localStorage?.getItem('token')).subscribe(
         (response: Subtask[]) => {
           this.subtasks = response;
         }, 
@@ -83,10 +84,10 @@ export class TaskDetailsComponent implements OnInit {
     }
 
     if (this.task) {
-      if( !localStorage?.getItem('token') ){
+      if( !this._localStorage?.getItem('token') ){
         return;
       }
-      this.taskService.addSubtask(this.task.id, this.newSubtaskDescription,localStorage?.getItem('token')).subscribe(
+      this.taskService.addSubtask(this.task.id, this.newSubtaskDescription,this._localStorage?.getItem('token')).subscribe(
         (response: Subtask) => {
           this.subtasks.push(response);
           this.newSubtaskDescription = '';
@@ -104,10 +105,10 @@ export class TaskDetailsComponent implements OnInit {
 
   setTag(tag: Tag) {
     if (this.task?.id) {
-      if( !localStorage?.getItem('token')) {
+      if( !this._localStorage?.getItem('token')) {
         return;
       }
-        this.taskService.assignTagToTask(this.task.id, tag.id,localStorage?.getItem('token')).subscribe(
+        this.taskService.assignTagToTask(this.task.id, tag.id,this._localStorage?.getItem('token')).subscribe(
           (response) => {
             this.tagAssignedToTask = tag;
             if( this.task ){
@@ -124,10 +125,10 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   addTag(){
-    if( !localStorage?.getItem('token')){
+    if( !this._localStorage?.getItem('token')){
       return;
     }
-      this.tagsService.addTag(this.newTagName, localStorage?.getItem('token') || undefined).subscribe(
+      this.tagsService.addTag(this.newTagName, this._localStorage?.getItem('token') || undefined).subscribe(
         (response: Tag) => {
           this.newTagName = '';
           this.availableTags.push(response); 
@@ -147,7 +148,7 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   removeSubtask(subtask: Subtask){
-    if( !localStorage?.getItem('token')){
+    if( !this._localStorage?.getItem('token')){
       return;
     }
      this.taskService.removeSubtask(subtask.id,
@@ -177,10 +178,10 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   saveTask(){
-    if( !localStorage?.getItem('token')){
+    if( !this._localStorage?.getItem('token')){
       return;
     }
-       this.taskService.updateTask(this.task,localStorage?.getItem('token')).subscribe(
+       this.taskService.updateTask(this.task,this._localStorage?.getItem('token')).subscribe(
         (response => {
             this.loadTasksList();
         }),
@@ -215,10 +216,10 @@ export class TaskDetailsComponent implements OnInit {
 
   saveSubtask(subtask:Subtask) {
     this.editing = false;
-    if( !localStorage?.getItem('token')){
+    if( !this._localStorage?.getItem('token')){
       return;
     }
-    this.taskService.updateSubtask(subtask,localStorage?.getItem('token')).subscribe(
+    this.taskService.updateSubtask(subtask,this._localStorage?.getItem('token')).subscribe(
       (response => {
         this.loadSubtasks(this.task || undefined);
       }),
