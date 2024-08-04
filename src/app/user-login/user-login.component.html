@@ -1,28 +1,26 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title text-center">Login</h2>
+<div class="login-container d-flex justify-content-center align-items-center">
+  <div class="login-card">
+      <div class="login-card-header">
+          <h2 class="login-title">Login</h2>
+      </div>
+      <div class="login-card-body">
           <form (submit)="onLoginSubmit()">
-            <div class="form-group">
-              <label for="username">Username</label>
-              <input type="text" id="username" name="username" class="form-control" [(ngModel)]="username" required>
-            </div>
-            <div class="form-group">
-              <label for="password">Password</label>
-              <input type="password" id="password" name="password" class="form-control" [(ngModel)]="password" required>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
+              <div class="form-group">
+                  <label for="username" class="login-label">Username</label>
+                  <input type="text" id="username" name="username" class="login-input" [(ngModel)]="username" required>
+              </div>
+              <div class="form-group">
+                  <label for="password" class="login-label">Password</label>
+                  <input type="password" id="password" name="password" class="login-input" [(ngModel)]="password" required>
+              </div>
+              <button type="submit" class="btn oe_btn oe_login_button">Login</button>
           </form>
           <div *ngIf="errorMessage" class="alert alert-danger mt-3" role="alert">
-            {{ errorMessage }}
+              {{ errorMessage }}
           </div>
           <div class="text-center mt-3">
-            <p>Don't have an account? <a href="/signup">Go to Sign Up Page</a></p>
+              <p>Don't have an account? <a href="/signup" class="login-link">Go to Sign Up Page</a></p>
           </div>
-        </div>
       </div>
-    </div>
   </div>
 </div>

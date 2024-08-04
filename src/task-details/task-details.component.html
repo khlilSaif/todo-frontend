@@ -1,106 +1,119 @@
 <div class="task-details">
-  <div class="task-header d-flex justify-content-between align-items-center">
-    <ng-container *ngIf="!isEditingDescription; else editMode">
-      <h5 class="task-description" (click)="enableEdit()">
-        {{ task?.description }}
-        <i class="fas fa-pen edit-icon"></i>
-      </h5>
-    </ng-container>
-    <ng-template #editMode>
-      <div class="input-group">
-        <input
-          type="text"
-          [(ngModel)]="editableDescription"
-          class="form-control"
-          (keydown.enter)="updateDescription()"
-        />
-        <i class="fas fa-check confirm-icon" (click)="updateDescription()"></i>
-      </div>
-    </ng-template>
+  <div class="task-header section">
+    <label class="form-label mb-2" for="taskDescription">Task Name:</label>
+    <input 
+      type="text" 
+      [(ngModel)]="editableDescription" 
+      class="form-control" 
+      placeholder="{{editableDescription}}"
+      id="taskDescription"
+      (keydown.enter)="updateDescription()"
+      (blur)="updateDescription()"
+    />
   </div>
   <hr>
-  <div class="tags-section mb-3">
-    <h6>Tags
-      <button type="button" class="btn btn-sm btn-outline-primary ml-2" (click)="showTagInput = !showTagInput">
-        {{getTagInputText()}}
+  <div class="tags-section section">
+    <h6 class="d-flex justify-content-between align-items-center">
+      Tag
+      <button type="button" class="btn btn-primary btn-sm" (click)="showTagInput = !showTagInput">
+        {{ getTagInputText() }}
       </button>
     </h6>
-    <div *ngIf="showTagInput" class="tag-input">
-      <input type="text" [(ngModel)]="newTagName" placeholder="Enter tag name or select from list" class="form-control mt-2">
-      <ul class="list-group mt-2">
-          <li *ngFor="let tag of availableTags" class="list-group-item list-group-item-action tag-item" (click)="setTag(tag)">
-              <span>{{ tag.name }}</span>
-              
-              <!-- "X" button for tags -->
-              <button type="button" 
-                      class="btn-close-custom" 
-                      aria-label="Close" 
-                      (click)="rmTag(tag)" 
-                      (click)="$event.stopPropagation()">
-                  &times;
-              </button>
-          </li>
+    <div *ngIf="tagAssignedToTask" class="tag-container">
+      <span class="tag-badge" [style.background-color]="tagAssignedToTask.colorHash">
+        {{ tagAssignedToTask.name }}
+        <span class="hashed-color">{{ tagAssignedToTask.color }}</span>
+        <button 
+          type="button" 
+          class="btn-close-custom" 
+          aria-label="Close" 
+          (click)="unselectTag(tagAssignedToTask)" 
+          (click)="$event.stopPropagation()"
+        >
+          &times;
+        </button>
+      </span>
+    </div>
+    <div *ngIf="showTagInput">
+      <div class="tags-input-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="newTagName"
+          placeholder="Enter tag name or select from list"
+          class="new-tag-input form-control"
+        />
+        <button class="btn btn-primary btn-sm" (click)="addTag()">Add</button>
+      </div>
+      <ul class="list-group available-tags">
+        <li *ngFor="let tag of availableTags" class="list-group-item tag-item" (click)="setTag(tag)">
+          {{ tag.name }}
+          <button 
+            type="button" 
+            class="btn-close-custom" 
+            aria-label="Close" 
+            (click)="rmTag(tag)" 
+            (click)="$event.stopPropagation()"
+          >
+            &times;
+          </button>
+        </li>
       </ul>
-      <button class="btn btn-sm btn-primary mt-1" (click)="addTag()">Add</button>
-  </div>
-    <div *ngIf="tagAssignedToTask" class="tag-container mt-2">
-      <span class="badge" [style.backgroundColor]="tagAssignedToTask.color">{{ tagAssignedToTask.name }}</span>
     </div>
   </div>
-
   <!-- Blocker Task -->
-  <div class="form-group">
-    <label for="blockingTaskDetails" class="form-label">Blocked By</label>
-    <select class="form-select" id="blockingTaskDetails" [(ngModel)]="blocked" (change)="updateBlockedTask()">
-      <option [ngValue]="undefined">None</option>
+  <div class="form-group section">
+    <h6>Blocked By</h6>
+    <select class="form-control block-select" id="blockingTaskDetails" [(ngModel)]="blocked" (change)="updateBlockedTask()">
+      <option [ngValue]="null">None</option>
       <ng-container *ngFor="let taskOption of tasks">
-        <option *ngIf="taskOption.id !== blocked" [ngValue]="taskOption.id">{{ taskOption.description }}</option>
+        <option *ngIf="taskOption.id !== task?.id" [ngValue]="taskOption.id">
+          {{ taskOption.description }}
+        </option>
       </ng-container>
     </select>
   </div>
   
-  <div class="subtasks-section">
+  <div class="subtasks-section section">
     <h6>Subtasks</h6>
-    <div class="scrollable-subtasks">
-        <ul class="subtasks-list">
-            <li *ngFor="let subtask of subtasks" class="subtask-item">
-                <!-- Circle -->
-                <div class="circle-indicator" 
-                     [ngClass]="{'completed': subtask.completed}"
-                     (click)="toggleSubtaskCompletion(subtask)"
-                     (click)="$event.stopPropagation()">
-                </div>
-                
-                <!-- Input field for editing subtask -->
-                <input *ngIf="editing" 
-                       type="text" 
-                       [(ngModel)]="subtask.description" 
-                       (keydown.enter)="saveSubtask(subtask)" 
-                       (blur)="saveSubtask(subtask)"
-                       class="subtask-input" />
-
-                <!-- Subtask description -->
-                <span *ngIf="!editing" 
-                      class="subtask-text" 
-                      [ngClass]="{'completed-text': subtask.completed}"
-                      (dblclick)="editSubtask()">
-                    {{ subtask.description }}
-                </span>
-
-                <!-- "X" button to delete subtask -->
-                <button type="button" 
-                        class="btn-close-custom ml-auto" 
-                        aria-label="Close" 
-                        (click)="removeSubtask(subtask)" 
-                        (click)="$event.stopPropagation()">
-                    &times;
-                </button>
-            </li>
-        </ul>
+    <div class="subtask-add-wrapper section">
+      <input [(ngModel)]="newSubtaskDescription" class="new-subtask-input form-control" placeholder="Add a subtask" (keydown.enter)="addSubtask()" />
+      <button class="btn btn-primary" (click)="addSubtask()">Add</button>
     </div>
-  </div>
-  <div>
-    <input [(ngModel)]="newSubtaskDescription" class="new-subtask-input" placeholder="Add a subtask" (keydown.enter)="addSubtask()" />
-    <button class="btn btn-primary" (click)="addSubtask()">Add</button>
+    <div class="scrollable-subtasks">
+      <ul class="subtasks-list">
+        <li *ngFor="let subtask of subtasks" class="subtask-item">
+          <div 
+            class="circle-indicator" 
+            [ngClass]="{'completed': subtask.completed}" 
+            (click)="toggleSubtaskCompletion(subtask)"
+          ></div>
+          <span 
+            *ngIf="!editing" 
+            class="subtask-text" 
+            [ngClass]="{'completed-text': subtask.completed}" 
+            (dblclick)="editSubtask()"
+          >
+            {{ subtask.description }}
+          </span>
+          <input
+            *ngIf="editing" 
+            type="text" 
+            [(ngModel)]="subtask.description" 
+            (keydown.enter)="saveSubtask(subtask)" 
+            (blur)="saveSubtask(subtask)" 
+            class="subtask-input"
+          />
+          <button 
+            type="button" 
+            class="btn-close-custom ml-auto" 
+            aria-label="Close" 
+            (click)="removeSubtask(subtask)" 
+            (click)="$event.stopPropagation()"
+          >
+            &times;
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

@@ -30,13 +30,14 @@ export class TaskDetailsComponent implements OnInit {
   newTagName: string = '';
   showTagInput: boolean = false;
   isEditingDescription = false;
-  editableDescription = '';
+  editableDescription = this.task?.description || '';
   isValidDescription = true;
   editing: boolean = false;
 
 
   constructor(private taskService: TaskService, private tagsService: TagsService, private router: Router, private _localStorage: LocalStorageService) {
       this.blocked = this.task?.blocked_task;
+      this.editableDescription = this.task?.description || '';
       if(!this._localStorage?.getItem('token')){
         this.router.navigate(['/login']);
       }
@@ -45,7 +46,9 @@ export class TaskDetailsComponent implements OnInit {
   ngOnInit() {
     if (this.task?.id) {
       this.blocked = this.task?.blocked_task;
+      this.editableDescription = this.task?.description || '';
       this.loadSubtasks(this.task);
+      console.log(this.task.tags);
     }
   }
 
@@ -57,6 +60,7 @@ export class TaskDetailsComponent implements OnInit {
     if (this.task?.id) {
       this.loadSubtasks(this.task);
       this.blocked = this.task?.blocked_task;
+      this.editableDescription = this.task?.description || '';
     } else {
       this.subtasks = [];
     }
@@ -116,6 +120,7 @@ export class TaskDetailsComponent implements OnInit {
             }
             this.showTagDropdown = false;
             this.showTagInput = false;
+            this.loadTasksList();
           },
           (error) => {
             console.error('Error adding tag:', error);
@@ -164,6 +169,16 @@ export class TaskDetailsComponent implements OnInit {
 
   rmTag(tag: Tag){
       this.removeTag.emit(tag);
+  }
+
+  unselectTag(tag: Tag){
+    if( this.task ){
+      if( this.task.tags ){
+        this.task.tags = undefined;
+        this.tagAssignedToTask = undefined;
+        this.saveTask();
+      }
+    }
   }
 
   close() {

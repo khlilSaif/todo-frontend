@@ -7,6 +7,7 @@ import { TaskDetailsComponent } from '../task-details/task-details.component';
 import { TagsService } from '../services/tags.service';
 import { error } from 'console';
 import { Router } from '@angular/router';
+import { repeat } from 'rxjs';
 
 @Component({
   selector: 'app-task-list',
@@ -100,6 +101,7 @@ export class TaskListComponent implements OnInit, OnChanges {
   }
 
   addTask() {
+    console.log(this.newTask.description);
     if (!this.newTask.description) {
       return;
     }
@@ -141,6 +143,7 @@ export class TaskListComponent implements OnInit, OnChanges {
     this.tagsService.getAvailableTags(localStorage?.getItem('token') || undefined).subscribe(
       (response: Tag[]) => {
         this.availableTags = response;
+        console.log(this.availableTags);
         this.mapTagsAndTasks();
       },
       (error) => {

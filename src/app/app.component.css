@@ -3,31 +3,35 @@ body {
   margin: 0;
 }
 
-.navbar {
+.o_navbar {
   overflow: hidden;
-  background-color: #007bff; /* Blue background */
+  background-color: #424242; /* Odoo-like dark grey background color */
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 1000;
   display: flex;
-  justify-content: space-around; /* Space around for even distribution */
+  justify-content: flex-end; /* Align links to the right */
   align-items: center;
+  padding: 0.5rem 1rem;
 }
 
-.navbar a {
+.o_nav_link {
   color: white;
   text-align: center;
   padding: 14px 20px;
   text-decoration: none;
+  font-size: 1rem;
 }
 
-.navbar a:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter blue background */
+.o_nav_link:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter background */
   color: white;
   transition: background-color 0.3s, color 0.3s; /* Smooth transition */
 }
 
-.main-content {
-  padding-top: 50px; /* Add padding to avoid content hidden behind the navbar */
+.o_main_content {
+  box-shadow: rgb(0, 0, 0,0.1);
+  background-color: rgb(0, 0, 0,0.1);
+  padding-top: 40px; /* Add padding to avoid content hidden behind the navbar */
 }

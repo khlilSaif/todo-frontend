@@ -1,9 +1,9 @@
-<div class="navbar">
-    <a (click)="checkGuest()" routerLink="/project">Home</a>
-    <a routerLink="/about">About</a>
-    <a *ngIf="!guest" routerLink="/logout">Logout</a>
-    <a *ngIf="guest" routerLink="login">login</a>
-</div>
-<div class="main-content">
+<div class="o_navbar">
+    <a class="o_nav_link" (click)="checkGuest()" routerLink="/project">Home</a>
+    <a class="o_nav_link" routerLink="/about">About</a>
+    <a class="o_nav_link" *ngIf="!guest" routerLink="/logout">Logout</a>
+    <a class="o_nav_link" *ngIf="guest" routerLink="login">Login</a>
+  </div>
+  <div class="o_main_content">
     <router-outlet></router-outlet>
-</div>
+  </div>

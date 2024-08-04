@@ -15,7 +15,7 @@ export interface ProjectInput {
 export interface Tag { 
     id: number;
     name: string;
-    color: string;
+    colorHash: string;
     user_id: number;
 }
 

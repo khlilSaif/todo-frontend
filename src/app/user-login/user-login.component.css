@@ -1,63 +1,102 @@
-/* frontend\app\src\app\signup\signup.component.css */
-/* user-signup.component.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f4;
+}
 
-/* Container to center the form */
-.signup-container {
+.login-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Adjust as needed */
-  background-color: #f0f0f0; /* Light background color */
+  height: 100vh;
+  background-color: #f4f4f4;
 }
 
-/* Form styling */
-.signup-form {
-  width: 400px; /* Adjust width as needed */
-  padding: 30px;
-  background-color: #ffffff; /* White background */
+.login-card {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Light shadow */
+  padding: 40px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
 }
 
-.signup-form h2 {
+.login-card-header {
   text-align: center;
-  color: #333333; /* Dark text color */
   margin-bottom: 20px;
 }
 
-.signup-form label {
-  display: block;
+.login-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin: 0;
+}
+
+.login-card-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.login-label {
   font-weight: bold;
-  margin-bottom: 8px;
+  color: #333;
+  margin-bottom: 5px;
+  display: block;
 }
 
-.signup-form input[type="text"],
-.signup-form input[type="password"] {
+.login-input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
-  border: 1px solid #cccccc; /* Light border */
-  border-radius: 4px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
   box-sizing: border-box;
+  font-size: 1rem;
+  background-color: #fafafa; /* Light background color */
 }
 
-.signup-form button {
-  width: 100%;
-  padding: 12px;
-  background-color: #4CAF50; /* Green button */
-  color: #ffffff; /* White text */
-  border: none;
+.oe_btn {
+  display: inline-block;
+  font-weight: 500;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #17a2b8; /* Teal color from "Add Project" button */
+  border: 1px solid #17a2b8; /* Matching border color */
+  padding: 10px 20px;
+  font-size: 1rem;
   border-radius: 4px;
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
-.alert-danger {
+.oe_btn:hover {
+  background-color: #138496; /* Darker teal for hover */
+  border-color: #138496; /* Matching border on hover */
+}
+
+.alert {
+  padding: 10px;
+  border-radius: 4px;
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
+  font-size: 0.875rem;
 }
 
-.alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
+.text-center {
+  text-align: center;
+}
+
+.login-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
 }
