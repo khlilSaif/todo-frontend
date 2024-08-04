@@ -172,12 +172,11 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   unselectTag(tag: Tag){
+    console.log("tag", this.task?.tags );
     if( this.task ){
-      if( this.task.tags ){
         this.task.tags = undefined;
-        this.tagAssignedToTask = undefined;
+        this.tagAssignedToTask = null;
         this.saveTask();
-      }
     }
   }
 

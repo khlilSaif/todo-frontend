@@ -47,6 +47,9 @@ export class AppComponent implements OnChanges, OnInit{
         console.log(value, "guest");
         if (value !== null) {
           this.guest = value !== 'false';
+          if( !this._localStorage.getItem('token') && this.guest ){
+            this.add_guest_user();
+          }
         }
       });
     }
@@ -75,9 +78,8 @@ export class AppComponent implements OnChanges, OnInit{
     }
     
     add_guest_user() {
-        this._localStorage?.setItem('guest', 'true');
         this.userService.addGuestUser().subscribe(
-            (response) => {this._localStorage?.setItem('guest', 'true'); this._localStorage.setItem('token',response.access_token);this.router.navigate(['/project']);},
+            (response) => { this._localStorage.setItem('token',response.access_token); this._localStorage?.setItem('guest', 'true');this.router.navigate(['/project']);},
             (error) => {}
         );
     }

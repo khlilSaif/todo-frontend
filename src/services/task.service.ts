@@ -108,7 +108,7 @@ export class TaskService {
         id: task?.id,
         description: task?.description,
         completed: task?.completed,
-        tag_id: task?.tags?.id,
+        tag_id: task?.tags?.id || null,
         blocked_task: task?.blocked_task,
         project_id: task?.project_id
       },

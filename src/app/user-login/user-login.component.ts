@@ -44,4 +44,8 @@ export class LoginComponent {
         }
       );
   }
+  
+  continueAsGuest() {
+    this._localStorage?.setItem('guest', 'true');
+  }
 }

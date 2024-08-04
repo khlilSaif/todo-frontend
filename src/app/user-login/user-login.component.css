@@ -18,7 +18,7 @@ body {
   border-radius: 8px;
   padding: 40px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  max-width: 450px; /* Increased max-width */
   width: 100%;
   margin: 0 auto;
 }
@@ -29,7 +29,7 @@ body {
 }
 
 .login-title {
-  font-size: 1.5rem;
+  font-size: 2rem; /* Increased font size */
   color: #333;
   margin: 0;
 }
@@ -47,15 +47,16 @@ body {
   color: #333;
   margin-bottom: 5px;
   display: block;
+  font-size: 1.1rem; /* Increased font size */
 }
 
 .login-input {
   width: 100%;
-  padding: 10px;
+  padding: 15px; /* Increased padding */
   border: 1px solid #ddd;
   border-radius: 6px;
   box-sizing: border-box;
-  font-size: 1rem;
+  font-size: 1.1rem; /* Increased font size */
   background-color: #fafafa; /* Light background color */
 }
 
@@ -66,12 +67,13 @@ body {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  background-color: #17a2b8; /* Teal color from "Add Project" button */
+  background-color: #17a2b8; /* Teal color */
   border: 1px solid #17a2b8; /* Matching border color */
-  padding: 10px 20px;
-  font-size: 1rem;
+  padding: 15px 20px; /* Increased padding */
+  font-size: 1.1rem; /* Increased font size */
   border-radius: 4px;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  width: 100%; /* Make button full-width */
 }
 
 .oe_btn:hover {
@@ -85,7 +87,7 @@ body {
   color: #721c24;
   background-color: #f8d7da;
   border-color: #f5c6cb;
-  font-size: 0.875rem;
+  font-size: 1rem; /* Adjusted font size */
 }
 
 .text-center {
@@ -95,8 +97,28 @@ body {
 .login-link {
   color: #007bff;
   text-decoration: none;
+  font-size: 1.1rem; /* Increased font size */
 }
 
 .login-link:hover {
   text-decoration: underline;
+}
+
+/* Additional Styles for Guest Button */
+.guest-btn-container {
+  margin-top: 15px;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border: 1px solid #17a2b8;
+  color: #17a2b8;
+  padding: 15px 20px; /* Increased padding */
+  font-size: 1.1rem; /* Increased font size */
+  width: 100%; /* Make button full-width */
+}
+
+.btn-outline:hover {
+  background-color: #17a2b8;
+  color: #fff;
 }

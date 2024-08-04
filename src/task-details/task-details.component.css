@@ -54,10 +54,13 @@ body {
   border-radius: 50%;
   margin-right: 10px;
   cursor: pointer;
+  border: 2px solid grey;
 }
 
 .circle-indicator.completed {
   background-color: grey; /* Updated to match completed color */
+  border-radius: 50%;
+  border: 2px solid grey;
 }
 
 .completed-text {
