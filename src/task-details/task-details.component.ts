@@ -168,6 +168,9 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   rmTag(tag: Tag){
+      if( tag.id === this.tagAssignedToTask.id) {
+        this.tagAssignedToTask = null;
+      }
       this.removeTag.emit(tag);
   }
 
