@@ -133,6 +133,9 @@ export class TaskDetailsComponent implements OnInit {
     if( !this._localStorage?.getItem('token')){
       return;
     }
+    if( this.newTagName.trim() === '') {
+      return;
+    }
       this.tagsService.addTag(this.newTagName, this._localStorage?.getItem('token') || undefined).subscribe(
         (response: Tag) => {
           this.newTagName = '';
