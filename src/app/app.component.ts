@@ -33,7 +33,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnChanges, OnInit{
     user: number = 0;
-    guest: boolean = false;
+    guest: boolean = true;
     private storageSubscription: Subscription = undefined!;
     constructor(private userService: UserService, private _localStorage: LocalStorageService, private router: Router) {
     }
@@ -49,6 +49,9 @@ export class AppComponent implements OnChanges, OnInit{
           this.guest = value !== 'false';
           if( !this._localStorage.getItem('token') && this.guest ){
             this.add_guest_user();
+          }
+          if( this._localStorage.getItem('token') ){
+            this.router.navigate(['/project']);
           }
         }
       });
